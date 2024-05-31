@@ -1,6 +1,6 @@
 {
   "name": "@tedslittlerobot/commandeer",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A wrapper around CommanderJS with a few common utilities.",
   "scripts": {
     "clean": "rm -rf build bin dist",
