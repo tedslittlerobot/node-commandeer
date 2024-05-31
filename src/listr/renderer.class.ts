@@ -1,5 +1,5 @@
-import { DefaultRenderer, ListrLogger, ProcessOutput } from "listr2";
-import { stderr } from "process";
+import {stderr} from 'node:process';
+import {DefaultRenderer, ListrLogger, ProcessOutput} from 'listr2';
 
 export class CommandeerRenderer extends DefaultRenderer {
 	constructor(tasks: any, options: any, events: any) {
