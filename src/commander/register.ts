@@ -2,7 +2,7 @@ import {type Command} from 'commander';
 import {type TreeValue} from 'omelette';
 import {type CommandRegistrar} from './types.js';
 
-export function registerCommands(
+export default function registerCommands(
 	cli: Command,
 	commands: CommandRegistrar[],
 ): {cli: Command; tree: TreeValue} {

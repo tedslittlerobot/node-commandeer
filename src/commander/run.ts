@@ -2,9 +2,9 @@ import {argv} from 'node:process';
 import {type Command} from 'commander';
 import runCompletions from 'src/completions/completions.js';
 import {type CommandRegistrar} from './types.js';
-import {registerCommands} from './register.js';
+import registerCommands from './register.js';
 
-export function run(program: Command, commands: CommandRegistrar[]) {
+export default function run(program: Command, commands: CommandRegistrar[]) {
 	const {cli, tree} = registerCommands(program, commands);
 
 	if (!runCompletions(tree, argv)) {

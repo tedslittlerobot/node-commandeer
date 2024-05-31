@@ -1,1 +1,1 @@
-export {default as ls} from './instance.js';
+export * from './instance.js';

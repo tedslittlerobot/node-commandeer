@@ -1,2 +1,2 @@
-export * from './register.js';
 export * from './types.js';
+export * from './run-program.js';

@@ -1,9 +1,9 @@
 import {Command} from 'commander';
 import ls from 'src/log-stream/instance.js';
 import type {CommandRegistrar} from './types.js';
-import {run} from './run.js';
+import run from './run.js';
 
-export default function runProgram(name: string, version: string, description: string, commands: CommandRegistrar[]) {
+export function runProgram(name: string, version: string, description: string, commands: CommandRegistrar[]) {
 	const program = ls.setupCommander(new Command(name));
 
 	program
