@@ -1,3 +1,4 @@
-# Barry Cryer
+Commandeer
+==========
 
-Node CLI Banner Helpers
+A wrapper around CommanderJS with a few common utilities.

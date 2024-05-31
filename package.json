@@ -1,7 +1,7 @@
 {
   "name": "@tedslittlerobot/commandeer",
   "version": "0.0.1",
-  "description": "CommanderJS wrapper",
+  "description": "A wrapper around CommanderJS with a few common utilities.",
   "scripts": {
     "clean": "rm -rf build bin dist",
     "build": "tsc && ts-rel src build",
@@ -45,6 +45,7 @@
     "@types/node": "^20.12.13",
     "@types/omelette": "^0.4.4",
     "ava": "^6.1.3",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "xo": "^0.58.0"
   }
