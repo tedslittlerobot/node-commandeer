@@ -4,11 +4,11 @@
   "description": "A wrapper around CommanderJS with a few common utilities.",
   "scripts": {
     "clean": "rm -rf build bin dist",
-    "build": "tsc && ts-rel src build",
+    "build": "npm run clean && tsc && ts-rel src build",
     "test": "npm run clean && npm run build && ava",
     "lint": "xo",
     "lint:fix": "xo --fix",
-    "prepublishOnly": "npm run lint"
+    "prepublishOnly": "npm run lint && npm run build"
   },
   "engines": {
     "node": ">=18"
