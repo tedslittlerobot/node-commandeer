@@ -1,7 +1,5 @@
-import {argv} from 'node:process';
 import {type Command} from 'commander';
 import {type TreeValue} from 'omelette';
-import runCompletions from './completions.js';
 import {type CommandRegistrar} from './types.js';
 
 export function registerCommands(
@@ -38,13 +36,4 @@ export function registerCommands(
 	}
 
 	return {cli, tree};
-}
-
-export default function run(program: Command, commands: CommandRegistrar[]) {
-	const {cli, tree} = registerCommands(program, commands);
-
-	if (!runCompletions(tree, argv)) {
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		cli.parseAsync();
-	}
 }

@@ -1,5 +1,5 @@
 import omelette, {type TreeValue} from 'omelette';
-import {checkArgumentsForArguments} from './helpers.js';
+import {checkArgumentsForArguments} from './check-arguments.js';
 
 function factory() {
 	return omelette('umenv');
