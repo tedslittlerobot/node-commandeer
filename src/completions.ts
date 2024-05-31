@@ -1,34 +1,34 @@
-import omelette, {TreeValue} from 'omelette';
-import {checkArgsForArgs} from './helpers';
+import omelette, {type TreeValue} from 'omelette';
+import {checkArgumentsForArguments} from './helpers.js';
 
 function factory() {
-  return omelette('umenv');
+	return omelette('umenv');
 }
 
-const errorMessage =
-  'Something odd has happened - the completions source should have been returned';
+const errorMessage
+  = 'Something odd has happened - the completions source should have been returned';
 
 export default function runCompletions(
-  tree: TreeValue,
-  args: string[]
+	tree: TreeValue,
+	arguments_: string[],
 ): boolean {
-  if (checkArgsForArgs(args, ['--completion', '--completion-fish'])) {
-    factory();
+	if (checkArgumentsForArguments(arguments_, ['--completion', '--completion-fish'])) {
+		factory();
 
-    throw new Error(errorMessage);
-  } else if (checkArgsForArgs(args, ['--compgen'])) {
-    factory().tree(tree).init();
+		throw new Error(errorMessage);
+	} else if (checkArgumentsForArguments(arguments_, ['--compgen'])) {
+		factory().tree(tree).init();
 
-    return true;
-  } else if (checkArgsForArgs(args, ['--setup-completions'])) {
-    factory().setupShellInitFile();
+		return true;
+	} else if (checkArgumentsForArguments(arguments_, ['--setup-completions'])) {
+		factory().setupShellInitFile();
 
-    throw new Error(errorMessage);
-  } else if (checkArgsForArgs(args, ['--debug-completion-tree'])) {
-    console.info(tree);
+		throw new Error(errorMessage);
+	} else if (checkArgumentsForArguments(arguments_, ['--debug-completion-tree'])) {
+		console.info(tree);
 
-    return true;
-  }
+		return true;
+	}
 
-  return false;
+	return false;
 }

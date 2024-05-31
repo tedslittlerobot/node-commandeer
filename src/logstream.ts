@@ -1,3 +1,3 @@
-import LogStreamer from './LogStreamer.class';
+import LogStreamer from './log-streamer.js';
 
 export const ls = new LogStreamer();

@@ -1,34 +1,51 @@
 {
-  "name": "grandmaster-and-commander",
+  "name": "@tedslittlerobot/commandeer",
+  "version": "0.0.1",
+  "description": "CommanderJS wrapper",
+  "scripts": {
+    "clean": "rm -rf build bin dist",
+    "build": "tsc && ts-rel src build",
+    "test": "npm run clean && npm run build && ava",
+    "lint": "xo",
+    "lint:fix": "xo --fix",
+    "prepublishOnly": "npm run lint && npm run test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module",
+  "module": "build/index.js",
+  "main": "build/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tedslittlerobot/node-commandeer.git"
+  },
+  "keywords": [
+    "node",
+    "cli",
+    "banner",
+    "text"
+  ],
+  "author": "Stefan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tedslittlerobot/commandeer/issues"
+  },
+  "homepage": "https://github.com/tedslittlerobot/commandeer#readme",
   "dependencies": {
     "@inquirer/prompts": "^5.0.4",
-    "chalk": "^4.0.0",
+    "chalk": "^5.3.0",
     "commander": "^12.1.0",
+    "listr2": "^8.2.1",
     "omelette": "^0.4.17",
-    "strip-ansi": "^6.0.0"
+    "strip-ansi": "^7.1.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.5",
+    "@tedslittlerobot/ts-relativity": "^1.0.2",
+    "@types/node": "^20.12.13",
     "@types/omelette": "^0.4.4",
-    "gts": "^5.3.0",
-    "typescript": "^5.4.5"
-  },
-  "scripts": {
-    "lint": "gts lint",
-    "clean": "gts clean",
-    "compile:cjs": "tsc",
-    "compile:esm": "tsc -p tsconfig.esm.json",
-    "compile": "npm run compile:cjs && npm run compile:esm",
-    "fix": "gts fix",
-    "prepare": "npm run compile",
-    "pretest": "npm run compile",
-    "posttest": "npm run lint",
-    "prepublishOnly": "npm run compile"
-  },
-  "main": "build/cjs/src/index.js",
-  "module": "build/esm/src/index.js",
-  "files": ["build/", "readme.md", "package.json"],
-  "engines": {
-    "node": ">=18.0.0"
+    "ava": "^6.1.3",
+    "typescript": "^5.4.5",
+    "xo": "^0.58.0"
   }
 }

@@ -1,22 +1,22 @@
-import {Command} from 'commander';
-import {Choices, TreeValue} from 'omelette';
+import {type Command} from 'commander';
+import {type Choices, type TreeValue} from 'omelette';
 
 export type CommandRegistrar = RegisteredCommand | CommandGroup;
 
-export interface RegisteredCommand {
-  type: 'command';
-  name: string;
-  description?: string;
-  config?: (command: Command) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  action: (...args: any[]) => Promise<void>;
-  completions: () => TreeValue | Choices;
-}
+export type RegisteredCommand = {
+	type: 'command';
+	name: string;
+	description?: string;
+	config?: (command: Command) => void;
 
-export interface CommandGroup {
-  type: 'group';
-  name: string;
-  description?: string;
-  config?: (command: Command) => void;
-  commands: CommandRegistrar[];
-}
+	action: (...arguments_: any[]) => Promise<void>;
+	completions: () => TreeValue | Choices;
+};
+
+export type CommandGroup = {
+	type: 'group';
+	name: string;
+	description?: string;
+	config?: (command: Command) => void;
+	commands: CommandRegistrar[];
+};

@@ -1,11 +1,9 @@
-export function checkArgsForArgs(args: string[], targets: string[]): boolean {
-  for (let index = 0; index < targets.length; index++) {
-    const target = targets[index];
+export function checkArgumentsForArguments(source: string[], targets: string[]): boolean {
+	for (const target of targets) {
+		if (source.includes(target)) {
+			return true;
+		}
+	}
 
-    if (~args.indexOf(target)) {
-      return true;
-    }
-  }
-
-  return false;
+	return false;
 }
