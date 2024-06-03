@@ -1,8 +1,7 @@
 {
   "name": "@tedslittlerobot/commandeer",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A wrapper around CommanderJS with a few common utilities.",
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tedslittlerobot/node-commandeer.git"
