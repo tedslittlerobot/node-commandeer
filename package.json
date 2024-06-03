@@ -50,7 +50,9 @@
   "main": "lib/index.js",
   "exports": {
     ".": "./lib/index.js",
-    "./log-stream": "./lib/index.js",
-    "./inputs": "./lib/inputs.js"
+    "./lib/commander": "./lib/commander/index.js",
+    "./lib/log-stream": "./lib/log-stream/index.js",
+    "./lib/inputs": "./lib/inputs/index.js",
+    "./lib/listr": "./lib/listr/index.js"
   }
 }
