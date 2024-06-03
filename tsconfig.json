@@ -10,7 +10,7 @@
 
     "rootDir": "./src",
     "baseUrl": "./",
-    "outDir": "build",
+    "outDir": "lib",
     "paths": {
       "src/*": ["./src/*"]
     },
