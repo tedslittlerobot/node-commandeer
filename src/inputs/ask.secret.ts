@@ -3,7 +3,6 @@ import {password} from '@inquirer/prompts';
 
 export async function askForSecret(
 	question: string,
-	defaultChoice?: string,
 	validate?: (value: string) => boolean | string | Promise<string | boolean>,
 ) {
 	return password({
