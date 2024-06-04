@@ -36,15 +36,17 @@ export default class LogStreamer {
 	public aboveThresholdStream?: Writable = stderr as Writable;
 	public belowThresholdStream?: Writable = undefined;
 
-	streamUnderThresholdToFile(location: string, name: string) {
-		const path = `${location}/${name.toLowerCase().replace(' ', '-')}.log`;
+	public logFilePath?: string = undefined;
 
-		if (existsSync(path)) {
-			unlinkSync(path);
-			writeFileSync(path, '');
+	streamUnderThresholdToFile(location: string, name: string) {
+		this.logFilePath = `${location}/${name.toLowerCase().replace(' ', '-')}.log`;
+
+		if (existsSync(this.logFilePath)) {
+			unlinkSync(this.logFilePath);
+			writeFileSync(this.logFilePath, '');
 		}
 
-		this.belowThresholdStream = createWriteStream(path) as Writable;
+		this.belowThresholdStream = createWriteStream(this.logFilePath) as Writable;
 
 		return this;
 	}
