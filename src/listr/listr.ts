@@ -7,7 +7,10 @@ import {CommandeerRenderer} from './renderer.class.js';
 export default async function runTasks<Context>(tasks: Array<ListrTask<Context>>, context?: Context) {
 	return (new Listr(tasks, {
 		renderer: CommandeerRenderer,
-		rendererOptions: {logger: new ListrLogger({processOutput: new ProcessOutput(stderr, stderr)})},
+		rendererOptions: {
+			showErrorMessage: false,
+			logger: new ListrLogger({processOutput: new ProcessOutput(stderr, stderr)})
+		},
 	}))
 		// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 		.run(context ?? {} as Context);
