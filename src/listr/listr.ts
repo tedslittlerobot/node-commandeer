@@ -9,7 +9,7 @@ export default async function runTasks<Context>(tasks: Array<ListrTask<Context>>
 		renderer: CommandeerRenderer,
 		rendererOptions: {
 			showErrorMessage: false,
-			logger: new ListrLogger({processOutput: new ProcessOutput(stderr, stderr)})
+			logger: new ListrLogger({processOutput: new ProcessOutput(stderr, stderr)}),
 		},
 	}))
 		// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
