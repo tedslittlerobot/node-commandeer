@@ -1,6 +1,7 @@
 import {type Command} from 'commander';
 import {type TreeValue} from 'omelette';
-import {type CommandRegistrar} from './types.js';
+import type {CommandRegistrar} from './types.js';
+import runActionThroughErrorHandlerMiddleware from './middleware.error.js';
 
 export default function registerCommands(
 	cli: Command,
@@ -21,7 +22,7 @@ export default function registerCommands(
 
 		switch (config.type) {
 			case 'command': {
-				command.action(config.action);
+				runActionThroughErrorHandlerMiddleware(command, config);
 
 				tree[config.name] = config.completions();
 				break;
