@@ -48,7 +48,8 @@
     "node": ">=18"
   },
   "bin": {
-    "xtest": "lib/scripts/xtest.js"
+    "xrun": "lib/scripts/xrun.js",
+    "xrun:compile": "lib/scripts/xrun.compile.js"
   },
   "type": "module",
   "module": "lib/index.js",
