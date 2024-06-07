@@ -5,7 +5,7 @@ import {$} from 'execa';
 
 const file: Record<string, string> = JSON.parse(readFileSync('package.json', 'utf8')) as Record<string, string>;
 
-await $`npm run compile`;
+await $({stdio: 'inherit'})`npm run compile`;
 
 let entrypoint = file.name;
 
