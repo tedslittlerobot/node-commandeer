@@ -49,7 +49,7 @@
   },
   "bin": {
     "xrun": "lib/scripts/xrun.js",
-    "xrun:compile": "lib/scripts/xrun.compile.js"
+    "xrun-compile": "lib/scripts/xrun.compile.js"
   },
   "type": "module",
   "module": "lib/index.js",
