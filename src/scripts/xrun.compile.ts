@@ -1,7 +1,8 @@
 #! /usr/bin/env node
 import {existsSync, readFileSync} from 'node:fs';
-import {argv} from 'node:process';
+import {argv, stderr} from 'node:process';
 import {$} from 'execa';
+import chalk from 'chalk';
 
 const file: Record<string, string> = JSON.parse(readFileSync('package.json', 'utf8')) as Record<string, string>;
 
@@ -19,4 +20,14 @@ if (!existsSync(entrypoint)) {
 	throw new Error('No entrypoint exists at ' + entrypoint);
 }
 
-await $({stdio: 'inherit'})(entrypoint, argv.slice(2));
+try {
+	await $({stdio: 'inherit'})(entrypoint, argv.slice(2));
+} catch (error) {
+	let message: string | undefined;
+
+	if (error instanceof Error) {
+		message = error.message;
+	}
+
+	stderr.write(chalk.red.bold(`\n[ERROR:xrun-compile] ${message}\n\n`));
+}
