@@ -2,7 +2,7 @@ import {stderr} from 'node:process';
 import {
 	Listr, ListrLogger, type ListrTask, ProcessOutput,
 } from 'listr2';
-import { Renderer, renderers } from './renderer.class.js';
+import {type Renderer, renderers} from './renderer.class.js';
 
 export default async function runTasks<Context>(
 	tasks: Array<ListrTask<Context>>,
