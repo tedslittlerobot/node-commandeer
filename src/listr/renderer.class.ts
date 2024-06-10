@@ -1,5 +1,7 @@
 import {stderr} from 'node:process';
-import {DefaultRenderer, ListrLogger, ProcessOutput} from 'listr2';
+import {
+	DefaultRenderer, ListrLogger, type ListrRenderer, ProcessOutput, SilentRenderer, SimpleRenderer, VerboseRenderer,
+} from 'listr2';
 
 export class CommandeerRenderer extends DefaultRenderer {
 	constructor(tasks: any, options: any, events: any) {
@@ -10,3 +12,12 @@ export class CommandeerRenderer extends DefaultRenderer {
 		super(tasks, {...options, logger}, events);
 	}
 }
+
+export type Renderer = 'default' | 'verbose' | 'simple' | 'silent';
+
+export const renderers: Record<Renderer, typeof ListrRenderer> = {
+	default: CommandeerRenderer,
+	verbose: VerboseRenderer,
+	simple: SimpleRenderer,
+	silent: SilentRenderer,
+};
