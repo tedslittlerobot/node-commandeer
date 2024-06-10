@@ -1,6 +1,6 @@
-import {exit, stderr} from 'node:process';
+import {stderr} from 'node:process';
 import {type Separator, select} from '@inquirer/prompts';
-import ls from 'src/log-stream/instance.js';
+import lm from 'margaret-lanterman';
 
 export type SelectChoice<Value> = {
 	value: Value;
@@ -10,7 +10,16 @@ export type SelectChoice<Value> = {
 	type?: never;
 };
 
+export class NoChoiceError extends Error {
+	constructor() {
+		super('No selection was made');
+	}
+}
+
 export async function choose<T>(question: string, choices: ReadonlyArray<Separator | SelectChoice<T>>): Promise<T> {
+	await lm.write(question, 'choice');
+	await lm.write(choices, 'choice:options');
+
 	try {
 		return await select({
 			message: question,
@@ -19,8 +28,7 @@ export async function choose<T>(question: string, choices: ReadonlyArray<Separat
 			choices,
 		}, {output: stderr});
 	} catch {
-		ls.fatal('Cancelled');
+		await lm.write('No selection', 'error');
+		throw new NoChoiceError();
 	}
-
-	exit(1);
 }

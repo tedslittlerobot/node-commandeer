@@ -1,13 +1,19 @@
 import {stderr} from 'node:process';
 import {Command} from 'commander';
 import chalk from 'chalk';
-import ls from 'src/log-stream/instance.js';
+import lm from 'margaret-lanterman';
+import setupLanterman from 'margaret-lanterman/lib/integrations/commander';
+import gl from 'gloucester';
+import setupGloucester from 'gloucester/lib/integrations/commander';
 import type {CommandRegistrar} from './types.js';
 import run from './run.js';
 
 // eslint-disable-next-line max-params
-export function runProgram(name: string, version: string, description: string, commands: CommandRegistrar[], configure?: (program: Command) => void) {
-	const program = ls.setupCommander(new Command(name));
+export async function runProgram(name: string, version: string, description: string, commands: CommandRegistrar[], configure?: (program: Command) => void) {
+	const program = new Command(name);
+
+	await setupLanterman(program, lm);
+	setupGloucester(program, gl);
 
 	program
 		.version(version)
@@ -24,5 +30,5 @@ export function runProgram(name: string, version: string, description: string, c
 		configure(program);
 	}
 
-	run(program, commands);
+	await run(program, commands);
 }
