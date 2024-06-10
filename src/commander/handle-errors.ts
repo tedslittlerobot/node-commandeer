@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import type {Command} from 'commander';
 import type {RegisteredCommand} from './types.js';
 
-export default function runActionThroughErrorHandlerMiddleware(command: Command, config: RegisteredCommand) {
+export default function handleErrors(command: Command, config: RegisteredCommand) {
 	command.action(async (...parameters: any[]) => {
 		try {
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
