@@ -16,9 +16,9 @@ export function wrapTasks<Context>(tasks: Array<ListrTask<Context>>) {
 			await lanterman.section(
 				title,
 				async () => {
-					item.title = chalk.cyan.bold(title);
+					t.title = chalk.cyan.bold(title);
 					await task(c, t);
-					item.title = chalk.green(title);
+					t.title = chalk.green(title);
 				},
 			);
 		};
