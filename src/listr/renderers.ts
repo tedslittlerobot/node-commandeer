@@ -36,6 +36,5 @@ export function getDefaultRenderer(forOutputs = false): Renderer {
 		return 'default';
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 	return gloucester.is.gt('normal') ? 'verbose' : 'simple';
 }
