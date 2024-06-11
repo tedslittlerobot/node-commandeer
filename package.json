@@ -1,6 +1,6 @@
 {
   "name": "@tedslittlerobot/commandeer",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "description": "A wrapper around CommanderJS with a few common utilities.",
   "repository": {
     "type": "git",
