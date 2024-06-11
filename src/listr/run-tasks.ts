@@ -3,13 +3,14 @@ import {
 	Listr, ListrLogger, type ListrTask, ProcessOutput,
 } from 'listr2';
 import {type Renderer, renderers, getDefaultRenderer} from './renderers.js';
+import {wrapTasks} from './middleware.lanterman.js';
 
 export async function runTasks<Context>(
 	tasks: Array<ListrTask<Context>>,
 	context?: Context,
 	renderer?: Renderer,
 ) {
-	return (new Listr(tasks, {
+	return (new Listr(wrapTasks(tasks), {
 		renderer: renderers[renderer ?? getDefaultRenderer(false)],
 		rendererOptions: {
 			showErrorMessage: false,
@@ -25,7 +26,7 @@ export async function runTasksForOutput<Context>(
 	context?: Context,
 	renderer?: Renderer,
 ) {
-	return (new Listr(tasks, {
+	return (new Listr(wrapTasks(tasks), {
 		renderer: renderers[renderer ?? getDefaultRenderer(true)],
 		rendererOptions: {
 			showErrorMessage: false,
