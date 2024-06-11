@@ -3,6 +3,13 @@ Commandeer
 
 A wrapper around CommanderJS with a few common utilities.
 
+Also supplies integrations with:
+
+- [CommanderJS](https://github.com/tj/commander.js) A CLI library for NodeJS
+- [Listr2](https://listr2.kilic.dev/) A library for managing concurrent and consecutive task lists in NodeJS
+- [Margaret Lanterman](https://github.com/tedslittlerobot/node-margaret-lanterman) A library for managing streaming things to log files
+- [Gloucester](https://github.com/tedslittlerobot/node-gloucester) A library for managing verbosity state
+
 ## Installation
 
 ```bash
@@ -39,7 +46,9 @@ Commandeer introduces a convention for registering commands and groups in comman
 
 ```bash
 src
+├── index.ts # The root index.ts should define the program
 ├── commands
+│   ├── config.ts # This should export the Command definition for a command
 │   ├── users # This is a sub-command / command group
 │   │   ├── index.ts # This should export the Group definition
 │   │   ├── details.ts # This should export the Command definition for a command
@@ -48,14 +57,14 @@ src
 ├── helpers # A directory for generic helpers
 │   ├── my-api.ts
 │   └── wordart.ts
-├── index.ts # The root index.ts should define the program
 └── tasks # A directory of Listr2 Task Lists
-    ├── user-details.ts # This should export the task list
-    ├── user-details.evaluate.ts # More complex individual tasks may have their own file
-    ├── user-details.evaluate.study-services.test.ts # And their own tests
-    ├── user-details.evaluate.study.test.ts # And their own tests
-    ├── user-details.io.ts # ... more complex task file
-    └── user-details.types.ts # And potentially some specific type definitions
+    └── user-details
+		    ├── index.ts # This should export the task list
+        ├── api-call.ts # More complex individual tasks may have their own file
+        ├── evaluate-study.test.ts # And their own tests
+        ├── evaluate-study.test.ts # And their own tests
+        ├── io.ts # ... more complex task file
+        └── types.ts # And potentially some specific type definitions
 ```
 
 #### Root index.ts
