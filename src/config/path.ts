@@ -1,3 +1,4 @@
+import {existsSync, mkdirSync} from 'node:fs';
 import {env} from 'node:process';
 
 let configDirectory: string | undefined;
@@ -11,5 +12,11 @@ export function configPath(name: string) {
 		throw new Error('Config directory is not set');
 	}
 
-	return `${env.HOME}/.config/${configDirectory}/${name}.json`;
+	const directory = `${env.HOME}/.config/${configDirectory}`;
+
+	if (!existsSync(directory)) {
+		mkdirSync(directory, {recursive: true});
+	}
+
+	return `${directory}/${name}.json`;
 }
