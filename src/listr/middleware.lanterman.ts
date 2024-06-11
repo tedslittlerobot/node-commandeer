@@ -18,9 +18,16 @@ export function wrapTasks<Context>(tasks: Array<ListrTask<Context>>) {
 			await lanterman.section(
 				title,
 				async () => {
-					t.title = chalk.cyan.bold(title);
-					await task(c, t);
-					t.title = chalk.greenBright(title);
+					await lanterman.feedback.withFeedback(
+						async message => {
+							t.title = `${chalk.cyan.bold(title)} / ${chalk.magenta(message)}`;
+						},
+						async () => {
+							t.title = chalk.cyan.bold(title);
+							await task(c, t);
+							t.title = chalk.greenBright(title);
+						},
+					);
 				},
 			);
 		};
@@ -28,9 +35,3 @@ export function wrapTasks<Context>(tasks: Array<ListrTask<Context>>) {
 
 	return tasks;
 }
-// Stuff for later
-// async () => lanterman.feedback.withFeedback(
-// 	async message => {
-// 		item.title = `${chalk.cyan.bold(title)} / ${chalk.magenta(message)}`;
-// 	},
-// ),
