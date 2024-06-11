@@ -1,6 +1,15 @@
-import chalk from 'chalk';
+import chalk, {type ChalkInstance} from 'chalk';
+import gloucester, {type Verbosity} from 'gloucester';
 import type {ListrTask} from 'listr2';
 import lanterman from 'margaret-lanterman';
+
+const verbosityColourMap: Record<Verbosity, ChalkInstance> = {
+	quiet: chalk.hidden,
+	normal: chalk.cyan,
+	verbose: chalk.magenta,
+	superVerbose: chalk.yellow,
+	ridiculouslyVerbose: chalk.magentaBright.bold,
+};
 
 export function wrapTasks<Context>(tasks: Array<ListrTask<Context>>) {
 	for (const item of tasks) {
@@ -19,8 +28,10 @@ export function wrapTasks<Context>(tasks: Array<ListrTask<Context>>) {
 				title,
 				async () => {
 					await lanterman.feedback.withFeedback(
-						async message => {
-							t.title = `${chalk.cyan.bold(title)} / ${chalk.magenta(message)}`;
+						async (message, verbosity) => {
+							if (gloucester.is.gte(verbosity)) {
+								t.title = `${chalk.cyan.bold(title)} / ${verbosityColourMap[verbosity](message)}`;
+							}
 						},
 						async () => {
 							t.title = chalk.cyan.bold(title);
