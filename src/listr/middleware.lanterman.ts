@@ -12,13 +12,15 @@ export function wrapTasks<Context>(tasks: Array<ListrTask<Context>>) {
 
 		title ||= '';
 
+		item.title = chalk.gray(title);
+
 		item.task = async (c, t) => {
 			await lanterman.section(
 				title,
 				async () => {
 					t.title = chalk.cyan.bold(title);
 					await task(c, t);
-					t.title = chalk.green(title);
+					t.title = chalk.greenBright(title);
 				},
 			);
 		};
