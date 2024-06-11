@@ -32,7 +32,7 @@
     "chalk": "^5.3.0",
     "commander": "^12.1.0",
     "execa": "^9.1.0",
-    "gloucester": "^0.1.3",
+    "gloucester": "^0.2.1",
     "listr2": "^8.2.1",
     "margaret-lanterman": "^0.2.1",
     "omelette": "^0.4.17",
@@ -58,10 +58,7 @@
   "main": "lib/index.js",
   "exports": {
     ".": "./lib/index.js",
-    "./lib/commander": "./lib/commander/index.js",
-    "./lib/log-stream": "./lib/log-stream/index.js",
     "./lib/inputs": "./lib/inputs/index.js",
-    "./lib/listr": "./lib/listr/index.js",
     "./lib/listr/inputs": "./lib/listr/inputs/index.js"
   }
 }
