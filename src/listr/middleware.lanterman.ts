@@ -12,21 +12,23 @@ export function wrapTasks<Context>(tasks: Array<ListrTask<Context>>) {
 
 		title ||= '';
 
-		item.task = async (c, t) =>
-			lanterman.section(
+		item.task = async (c, t) => {
+			await lanterman.section(
 				title,
-				async () => lanterman.feedback.withFeedback(
-					async message => {
-						item.title = `${chalk.cyan.bold(title)} / ${chalk.magenta(message)}`;
-					},
-					async () => {
-						item.title = chalk.cyan.bold(title);
-						await task(c, t);
-						item.title = chalk.green(title);
-					},
-				),
+				async () => {
+					item.title = chalk.cyan.bold(title);
+					await task(c, t);
+					item.title = chalk.green(title);
+				},
 			);
+		};
 	}
 
 	return tasks;
 }
+// Stuff for later
+// async () => lanterman.feedback.withFeedback(
+// 	async message => {
+// 		item.title = `${chalk.cyan.bold(title)} / ${chalk.magenta(message)}`;
+// 	},
+// ),
