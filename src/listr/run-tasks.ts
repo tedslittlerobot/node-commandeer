@@ -6,11 +6,11 @@ import {wrapListrTasks} from 'margaret-lanterman/lib/integrations/listr';
 import {type Renderer, renderers, getDefaultRenderer} from './renderers.js';
 
 export async function runTasks<Context>(
-	tasks: Array<ListrTask<Context>>,
+	tasks: Array<ListrTask<Context> | undefined>,
 	context?: Context,
 	renderer?: Renderer,
 ) {
-	return (new Listr(wrapListrTasks(tasks), {
+	return (new Listr(wrapListrTasks(tasks.filter(Boolean) as Array<ListrTask<Context>>), {
 		renderer: renderers[renderer ?? getDefaultRenderer(false)],
 		rendererOptions: {
 			showErrorMessage: false,
@@ -22,11 +22,11 @@ export async function runTasks<Context>(
 }
 
 export async function runTasksForOutput<Context>(
-	tasks: Array<ListrTask<Context>>,
+	tasks: Array<ListrTask<Context> | undefined>,
 	context?: Context,
 	renderer?: Renderer,
 ) {
-	return (new Listr(wrapListrTasks(tasks), {
+	return (new Listr(wrapListrTasks(tasks.filter(Boolean) as Array<ListrTask<Context>>), {
 		renderer: renderers[renderer ?? getDefaultRenderer(true)],
 		rendererOptions: {
 			showErrorMessage: false,
