@@ -4,9 +4,10 @@ import {
 } from 'listr2';
 import {wrapListrTasks} from 'margaret-lanterman/lib/integrations/listr';
 import {type Renderer, renderers, getDefaultRenderer} from './renderers.js';
+import type {TaskList} from './types.js';
 
 export async function runTasks<Context>(
-	tasks: Array<ListrTask<Context> | undefined>,
+	tasks: TaskList<Context>,
 	context?: Context,
 	renderer?: Renderer,
 ) {
@@ -22,7 +23,7 @@ export async function runTasks<Context>(
 }
 
 export async function runTasksForOutput<Context>(
-	tasks: Array<ListrTask<Context> | undefined>,
+	tasks: TaskList<Context>,
 	context?: Context,
 	renderer?: Renderer,
 ) {
