@@ -1,8 +1,18 @@
-import {readFile, writeFile} from 'node:fs/promises';
+import {readFile, unlink, writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import lm from 'margaret-lanterman';
 import {configPath} from './path.js';
 import {MissingConfigFileError} from './errors.js';
+
+export async function removeConfig(name: string): Promise<void> {
+	await lm.section(`removeConfig(${name})`, async () => {
+		const path = configPath(name);
+
+		await unlink(path);
+
+		await lm.write('Done', 'status');
+	});
+}
 
 export async function storeConfig<T>(name: string, config: T): Promise<T> {
 	return lm.section(`storeConfig(${name})`, async () => {
