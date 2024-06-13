@@ -8,6 +8,15 @@ import type {TaskList} from './types.js';
 
 export async function runTasks<Context>(
 	tasks: TaskList<Context>,
+	forOutput = false,
+	context?: Context,
+	renderer?: Renderer,
+) {
+	return forOutput ? runTasksForOutput(tasks, context, renderer) : runTasksForDisplay(tasks, context, renderer);
+}
+
+export async function runTasksForDisplay<Context>(
+	tasks: TaskList<Context>,
 	context?: Context,
 	renderer?: Renderer,
 ) {
