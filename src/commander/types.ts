@@ -1,4 +1,5 @@
 import {type Command} from 'commander';
+import {type ListrTask} from 'listr2';
 import {type Choices, type TreeValue} from 'omelette';
 
 export type CommandRegistrar = RegisteredCommand | CommandGroup;
@@ -20,3 +21,6 @@ export type CommandGroup = {
 	config?: (command: Command) => void;
 	commands: CommandRegistrar[];
 };
+
+export type TaskList<Context> = Array<ListrTask<Context> | undefined>;
+export type AsyncTaskList<Context> = Promise<TaskList<Context>>;
