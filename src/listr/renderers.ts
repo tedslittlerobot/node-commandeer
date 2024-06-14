@@ -4,6 +4,8 @@ import {
 } from 'listr2';
 import gloucester from 'gloucester';
 
+export type OutputMode = 'normal' | 'passive' | 'passive:silent';
+
 export class CommandeerRenderer extends DefaultRenderer {
 	constructor(tasks: any, options: any, events: any) {
 		const processOutput = new ProcessOutput(stderr, stderr);
@@ -27,13 +29,25 @@ export const renderers: Record<Renderer, typeof ListrRenderer> = {
  * @param forOutputs Whether the renderer needs to be able to be used with commands that output to stdout. Most commands just output for a user, in which case the default of false is fine as the fancy renderer uses stdout. In the case of commands which output JSON for piping or chaining, true should be used to force the use of a renderer which uses stderr.
  * @returns
  */
-export function getDefaultRenderer(forOutputs = false): Renderer {
+export function getDefaultRenderer(mode: OutputMode): Renderer {
 	if (gloucester.is.quiet) {
 		return 'silent';
 	}
 
-	if (!forOutputs) {
-		return 'default';
+	if (gloucester.is.normal) {
+		switch (mode) {
+			case 'normal': {
+				return 'default';
+			}
+
+			case 'passive': {
+				return 'simple';
+			}
+
+			case 'passive:silent': {
+				return 'silent';
+			}
+		}
 	}
 
 	return gloucester.is.gt('normal') ? 'verbose' : 'simple';
