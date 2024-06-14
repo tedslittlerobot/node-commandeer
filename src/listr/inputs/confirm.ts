@@ -8,7 +8,7 @@ export {ConfirmationRejected} from 'src/inputs/confirm.js';
 export async function confirm<Context>(
 	task: ListrTaskWrapper<Context, any, any>,
 	challenge: string,
-	defaultOption: false,
+	defaultOption = false,
 ) {
 	const response = await task.prompt(ListrInquirerPromptAdapter).run(coreConfirm, {message: challenge, default: defaultOption});
 
