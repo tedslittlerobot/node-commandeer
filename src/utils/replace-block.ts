@@ -27,6 +27,11 @@ ${buildClosingTag(target)}`;
 	const match = new RegExp(`${openingTag}.*${closingTag}`, 'gs');
 
 	if (match.test(input)) {
+		if (replaceWith === '') {
+			await lanterman.write('Removing block', 'replace-block:result');
+			return input.replace(match, '');
+		}
+
 		await lanterman.write('Replacing', 'replace-block:result');
 		return input.replace(match, content);
 	}
