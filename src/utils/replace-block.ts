@@ -36,6 +36,11 @@ ${buildClosingTag(target)}`;
 		return input.replace(match, content);
 	}
 
+	if (replaceWith === '') {
+		await lanterman.write('NOT Appending as replacement is empty', 'replace-block:result');
+		return input;
+	}
+
 	await lanterman.write('Appending', 'replace-block:result');
 
 	input += `\n${content}\n`;
