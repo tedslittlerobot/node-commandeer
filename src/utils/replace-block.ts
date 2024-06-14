@@ -1,4 +1,5 @@
-import {readFileSync, writeFileSync} from 'node:fs';
+import {readFile, writeFile} from 'node:fs/promises';
+import lanterman from 'margaret-lanterman';
 
 export type MarkerTarget = {
 	title: string;
@@ -6,17 +7,19 @@ export type MarkerTarget = {
 	box?: string;
 };
 
-export function replaceBlockInFile(file: string, target: MarkerTarget, replaceWith: string) {
-	const input = readFileSync(file, 'utf8');
+export async function replaceBlockInFile(file: string, target: MarkerTarget, replaceWith: string) {
+	await lanterman.write(file, 'replace-block:file');
+	const input = await readFile(file, 'utf8');
 
-	const output = replaceBlock(input, target, replaceWith);
+	const output = await replaceBlock(input, target, replaceWith);
 
-	writeFileSync(file, output, 'utf8');
+	await writeFile(file, output, 'utf8');
 }
 
-export function replaceBlock(input: string, target: MarkerTarget, replaceWith: string): string {
+export async function replaceBlock(input: string, target: MarkerTarget, replaceWith: string): Promise<string> {
 	const openingTag = buildOpeningTag(target);
 	const closingTag = buildClosingTag(target);
+	await lanterman.write(`${openingTag} - ${closingTag}`, 'replace-block:tags');
 	const content = `${buildOpeningTag(target)}
 ${replaceWith}
 ${buildClosingTag(target)}`;
@@ -24,8 +27,11 @@ ${buildClosingTag(target)}`;
 	const match = new RegExp(`${openingTag}.*${closingTag}`, 'gs');
 
 	if (match.test(input)) {
+		await lanterman.write('Replacing', 'replace-block:result');
 		return input.replace(match, content);
 	}
+
+	await lanterman.write('Appending', 'replace-block:result');
 
 	input += `\n${content}\n`;
 
