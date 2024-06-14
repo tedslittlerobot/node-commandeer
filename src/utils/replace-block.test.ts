@@ -17,9 +17,9 @@ test('build tags with subtitle', t => {
 	t.is(buildClosingTag({title: 'foo', subtitle: 'bar'}), '# END foo : bar #');
 });
 
-test('replaceBlock appends with no match', t => {
+test('replaceBlock appends with no match', async t => {
 	t.is(
-		replaceBlock('foo bar\n', {title: 'FOO'}, 'monkeys'),
+		await replaceBlock('foo bar\n', {title: 'FOO'}, 'monkeys'),
 		`foo bar
 
 # FOO #
@@ -29,9 +29,9 @@ monkeys
 	);
 });
 
-test('replaceBlock appends replacing match', t => {
+test('replaceBlock appends replacing match', async t => {
 	t.is(
-		replaceBlock(`foo bar
+		await replaceBlock(`foo bar
 
 # FOO #
 monkeys
