@@ -50,6 +50,7 @@
     "node": ">=18"
   },
   "bin": {
+    "reversion": "lib/scripts/reversion.js",
     "xrun": "lib/scripts/xrun.js",
     "xrun-compile": "lib/scripts/xrun.compile.js"
   },
