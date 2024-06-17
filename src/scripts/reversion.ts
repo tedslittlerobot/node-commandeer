@@ -24,9 +24,13 @@ if (!version) {
 	throw new Error('Nothing to reversion to!');
 }
 
+stderr.write(chalk.cyan.bold(`\nRe-versioning ${entrypoint} from ${token} to ${version}\n`));
+
 let contents = readFileSync(entrypoint, 'utf8');
 
-stderr.write(chalk.cyan.bold(`\nRe-versioning from ${token} to ${version}\n`));
+if (!contents.includes(`"${token}"`)) {
+	throw new Error('Nothing to reversion');
+}
 
 contents = contents.replace(`"${token}"`, `"${version}"`);
 
