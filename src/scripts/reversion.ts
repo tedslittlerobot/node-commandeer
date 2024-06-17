@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 import {existsSync, readFileSync, writeFileSync} from 'node:fs';
-import {argv, stderr} from 'node:process';
+import {argv, env, stderr} from 'node:process';
 import chalk from 'chalk';
 
 const file: Record<string, string> = JSON.parse(readFileSync('package.json', 'utf8')) as Record<string, string>;
@@ -18,7 +18,11 @@ if (!existsSync(entrypoint)) {
 }
 
 const token = argv[2];
-const version = argv[3];
+const version = argv[3] ?? env.REVERSION;
+
+if (!version) {
+	throw new Error('Nothing to reversion to!');
+}
 
 let contents = readFileSync(entrypoint, 'utf8');
 
