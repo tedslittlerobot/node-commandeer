@@ -6,7 +6,8 @@ import chalk from 'chalk';
 
 const file: Record<string, string> = JSON.parse(readFileSync('package.json', 'utf8')) as Record<string, string>;
 
-await $({stdio: 'inherit'})`npm run compile`;
+// eslint-disable-next-line @typescript-eslint/naming-convention
+await $({stdio: 'inherit', extendEnv: true, env: {REVERSION: 'xrun-compile'}})`npm run compile`;
 
 let entrypoint = file.name;
 
