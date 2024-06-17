@@ -5,11 +5,13 @@ import chalk from 'chalk';
 
 const file: Record<string, string> = JSON.parse(readFileSync('package.json', 'utf8')) as Record<string, string>;
 
-const entrypoint = file.module;
+let entrypoint = file.name;
 
 if (!entrypoint) {
-	throw new Error('Cannot get entrypoint from package.json (property: module)');
+	throw new Error('Cannot get entrypoint from package.json (property: name)');
 }
+
+entrypoint = `dist/${entrypoint}.cjs`;
 
 if (!existsSync(entrypoint)) {
 	throw new Error('No entrypoint exists at ' + entrypoint);
