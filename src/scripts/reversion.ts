@@ -24,7 +24,7 @@ let contents = readFileSync(entrypoint, 'utf8');
 
 stderr.write(chalk.cyan.bold(`\nRe-versioning from ${token} to ${version}\n`));
 
-contents = contents.replace(`'${token}'`, `'${version}'`);
+contents = contents.replace(`"${token}"`, `"${version}"`);
 
 writeFileSync(entrypoint, contents, 'utf8');
 
