@@ -24,7 +24,7 @@ export default function registerCommands(
 			case 'command': {
 				handleErrors(command, config);
 
-				tree[config.name] = config.completions();
+				tree[config.name] = config.completions ? config.completions() : [];
 				break;
 			}
 
