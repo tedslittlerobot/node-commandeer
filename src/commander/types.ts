@@ -1,4 +1,5 @@
 import {type Command} from 'commander';
+import {type GloucesterEvaluator} from 'gloucester';
 import {type Choices, type TreeValue} from 'omelette';
 
 export type CommandRegistrar = RegisteredCommand | CommandGroup;
@@ -8,6 +9,7 @@ export type RegisteredCommand = {
 	name: string;
 	description?: string;
 	config?: (command: Command) => void;
+	errorHandler?: (error: any, gloucester: GloucesterEvaluator) => void;
 
 	action: (...arguments_: any[]) => Promise<void>;
 	completions: () => TreeValue | Choices;

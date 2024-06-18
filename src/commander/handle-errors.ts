@@ -10,6 +10,10 @@ export default function handleErrors(command: Command, config: RegisteredCommand
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 			await config.action(...parameters);
 		} catch (error) {
+			if (config.errorHandler) {
+				config.errorHandler(error, gloucester);
+			}
+
 			if (error instanceof Error) {
 				if (gloucester.is.ridiculouslyVerbose) {
 					throw error;
