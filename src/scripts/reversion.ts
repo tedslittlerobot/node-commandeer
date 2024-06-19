@@ -18,11 +18,7 @@ if (!existsSync(entrypoint)) {
 }
 
 const token = argv[2];
-const version = argv[3] ?? env.REVERSION;
-
-if (!version) {
-	throw new Error('Nothing to reversion to!');
-}
+const version = argv[3] ?? env.REVERSION ?? 'unversioned';
 
 stderr.write(chalk.cyan.bold(`\nRe-versioning ${entrypoint} from ${token} to ${version}\n`));
 
