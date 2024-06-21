@@ -2,10 +2,10 @@ import {stderr} from 'node:process';
 import {Command} from 'commander';
 import chalk from 'chalk';
 import lm from 'margaret-lanterman';
+import config, {FilesystemScribe} from 'dot-config-cache';
 import setupLanterman from 'margaret-lanterman/lib/integrations/commander';
 import gl from 'gloucester';
 import setupGloucester from 'gloucester/lib/integrations/commander';
-import {setConfigDirectory} from 'src/config/path.js';
 import type {CommandRegistrar} from './types.js';
 import run from './run.js';
 
@@ -13,7 +13,11 @@ import run from './run.js';
 export async function runProgram(name: string, version: string, description: string, commands: CommandRegistrar[], configure?: (program: Command) => void) {
 	const program = new Command(name);
 
-	setConfigDirectory(name);
+	config.scribe = new FilesystemScribe(name);
+	config.subscribers.lanterman = async event => {
+		await lm.write(event, `config:${event.type}`);
+	};
+
 	await setupLanterman(program, lm);
 	setupGloucester(program, gl);
 
