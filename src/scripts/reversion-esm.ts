@@ -4,8 +4,8 @@ import {argv, env, stderr} from 'node:process';
 import chalk from 'chalk';
 
 const token = argv[2];
-const version = argv[3] ?? env.REVERSION ?? 'unversioned';
-const entrypoint = argv[4] ?? 'build/index.js';
+const entrypoint = argv[3] ?? 'build/index.js';
+const version = argv[4] ?? env.REVERSION ?? 'unversioned';
 
 if (!existsSync(entrypoint)) {
 	throw new Error('No entrypoint exists at ' + entrypoint);
