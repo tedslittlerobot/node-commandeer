@@ -63,6 +63,7 @@
     ".": "./lib/index.js",
     "./lib/utils": "./lib/utils/index.js",
     "./lib/inputs": "./lib/inputs/index.js",
-    "./lib/listr/inputs": "./lib/listr/inputs/index.js"
+    "./lib/listr/inputs": "./lib/listr/inputs/index.js",
+    "./lib/commander/commands/self-update": "./lib/commander/commands/self-update.js"
   }
 }
