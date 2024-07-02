@@ -3,18 +3,9 @@ import {existsSync, readFileSync, writeFileSync} from 'node:fs';
 import {argv, env, stderr} from 'node:process';
 import chalk from 'chalk';
 
-const file: Record<string, string> = JSON.parse(readFileSync('package.json', 'utf8')) as Record<string, string>;
-
 const token = argv[2];
 const version = argv[3] ?? env.REVERSION ?? 'unversioned';
-
-let entrypoint = file.name;
-
-if (!entrypoint) {
-	throw new Error('Cannot get entrypoint from package.json (property: name)');
-}
-
-entrypoint = `dist/${entrypoint}.cjs`;
+const entrypoint = argv[4] ?? 'build/index.js';
 
 if (!existsSync(entrypoint)) {
 	throw new Error('No entrypoint exists at ' + entrypoint);

@@ -52,6 +52,7 @@
   },
   "bin": {
     "reversion": "lib/scripts/reversion.js",
+    "reversion-esm": "lib/scripts/reversion-esm.js",
     "xrun": "lib/scripts/xrun.js",
     "xrun-compile": "lib/scripts/xrun.compile.js"
   },
