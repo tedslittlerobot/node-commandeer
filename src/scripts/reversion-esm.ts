@@ -15,11 +15,13 @@ stderr.write(chalk.cyan.bold(`\nRe-versioning ${entrypoint} from ${token} to ${v
 
 let contents = readFileSync(entrypoint, 'utf8');
 
-if (!contents.includes(`"${token}"`)) {
+if (!(contents.includes(`"${token}"`) || contents.includes(`'${token}'`))) {
 	throw new Error('Nothing to reversion');
 }
 
-contents = contents.replace(`"${token}"`, `"${version}"`);
+contents = contents
+	.replace(`"${token}"`, `"${version}"`)
+	.replace(`'${token}'`, `'${version}'`);
 
 writeFileSync(entrypoint, contents, 'utf8');
 
