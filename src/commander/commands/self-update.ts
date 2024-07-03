@@ -41,12 +41,20 @@ export default function selfUpdateCommandFactory(baseUrl: string, credentials: R
 /**
  * Resolve the release string. The rules are as follows:
  *
- * - If a specific version is provided, use that
+ * - If a specific version is provided, use that (mapping stable => latest, canary|unstable|main => preview)
  * - If the current version of the tool is a preview, use the preview release
  * - Otherwise, always get the latest (most likely)
  */
 function resolveRelease(version: string | undefined, command: Command): string {
 	if (version) {
+		if (version === 'stable') {
+			return 'latest';
+		}
+
+		if (['canary', 'unstable', 'main'].includes(version)) {
+			return 'preview';
+		}
+
 		return version;
 	}
 
