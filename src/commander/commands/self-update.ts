@@ -3,6 +3,7 @@ import {type Command} from 'commander';
 import gloucester from 'gloucester';
 import {runTasks} from 'src/listr/run-tasks.js';
 import {type CommandRegistrar} from 'src/commander/types.js';
+import {resolveRelease} from 'src/utils/resolve-release.js';
 import tasks from './self-update.tasks.js';
 
 type Options = Record<string, unknown>;
@@ -36,33 +37,4 @@ export default function selfUpdateCommandFactory(baseUrl: string, credentials: R
 			return [];
 		},
 	};
-}
-
-/**
- * Resolve the release string. The rules are as follows:
- *
- * - If a specific version is provided, use that (mapping stable => latest, canary|unstable|main => preview)
- * - If the current version of the tool is a preview, use the preview release
- * - Otherwise, always get the latest (most likely)
- */
-function resolveRelease(version: string | undefined, command: Command): string {
-	if (version) {
-		if (version === 'stable') {
-			return 'latest';
-		}
-
-		if (['canary', 'unstable', 'main'].includes(version)) {
-			return 'preview';
-		}
-
-		return version;
-	}
-
-	const commandVersion = command.version();
-
-	if (commandVersion?.endsWith('-preview')) {
-		return 'preview';
-	}
-
-	return 'latest';
 }
