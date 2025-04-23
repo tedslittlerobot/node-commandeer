@@ -18,6 +18,8 @@ type SelfUpdateConfig = {
 	release: string;
 	baseUrl: string;
 	credentials: Record<string, string>;
+	installCommand?: string;
+	usesHomebrew: boolean;
 };
 
 export default function selfUpdateTasks(config: SelfUpdateConfig): TaskList<Context> {
@@ -75,14 +77,25 @@ export default function selfUpdateTasks(config: SelfUpdateConfig): TaskList<Cont
 			},
 		},
 		{
-			title: 'Installing Dependencies',
+			title: 'Update Homebrew',
 			skip() {
-				return false;
+				return !config.usesHomebrew;
 			},
 			async task(context) {
 				await $({
 					stdio: gloucester.is.gte('verbose') ? 'inherit' : 'pipe',
-				})`${config.name} install`;
+				})`brew update`;
+			},
+		},
+		{
+			title: 'Installing Dependencies',
+			skip() {
+				return !config.installCommand;
+			},
+			async task(context) {
+				await $({
+					stdio: gloucester.is.gte('verbose') ? 'inherit' : 'pipe',
+				})`${config.name} ${config.installCommand!}`;
 			},
 		},
 	];

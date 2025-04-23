@@ -8,7 +8,12 @@ import tasks from './self-update.tasks.js';
 
 type Options = Record<string, unknown>;
 
-export default function selfUpdateCommandFactory(baseUrl: string, credentials: Record<string, string>): CommandRegistrar {
+export default function selfUpdateCommandFactory(
+	baseUrl: string,
+	credentials: Record<string, string>,
+	installCommand: string,
+	usesHomebrew: boolean,
+): CommandRegistrar {
 	return {
 		type: 'command',
 		name: 'self:update',
@@ -29,6 +34,8 @@ export default function selfUpdateCommandFactory(baseUrl: string, credentials: R
 					release: resolveRelease(version, command.parent!),
 					baseUrl,
 					credentials,
+					installCommand,
+					usesHomebrew,
 				}),
 				gloucester.is.gte('verbose') ? 'passive' : 'normal',
 			);
