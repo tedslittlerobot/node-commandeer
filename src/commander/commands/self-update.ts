@@ -11,8 +11,8 @@ type Options = Record<string, unknown>;
 export default function selfUpdateCommandFactory(
 	baseUrl: string,
 	credentials: Record<string, string>,
-	installCommand: string,
-	usesHomebrew: boolean,
+	usesHomebrew = false,
+	installCommand = 'install',
 ): CommandRegistrar {
 	return {
 		type: 'command',
